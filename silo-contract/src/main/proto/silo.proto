@@ -4,3 +4,37 @@
 syntax = "proto3";
 package pt.tecnico.sauron.silo.grpc;
 
+enum CamJoinResult{
+	USED_NAME = 0;
+	OUT_OF_BOUNDS_NAME = 1;
+	JOINED = 2;
+};
+
+
+
+message CamJoinRequest{
+	string name = 1;
+	int32 latitude = 2;
+	int32 longitute = 3;
+}
+
+message CamJoinResponse{
+	CamJoinResult result = 1;
+}
+
+message CamInfoRequest{
+	string name = 1;
+}
+
+message CamInfoResponse{
+	int32 longitude = 1;
+	int32 latitude = 2;
+}
+
+
+//Services
+
+service SS {
+	rpc cam_join(CamJoinRequest) returns (CamJoinResponse);
+	rpc cam_info(CamInfoRequest) returns (CamInfoRequest);
+}
